@@ -47,7 +47,7 @@ function popArray(nbr) {
         nextBrk = (nbr * i) + 1;
         breakCol.push(nextBrk);
     }
-    console.log(breakCol);
+    //console.log(breakCol);
     return breakCol;
 }
 
@@ -99,5 +99,21 @@ function colorDivs (arr) {
     }
 }
 
+function clearDivs () {
+    let allSlaves = document.querySelectorAll(".slave");
+    let allAlt = document.querySelectorAll(".alt");
+    let slaveArray = Array.from(allSlaves);
+    let altArray = Array.from(allAlt);
+    //console.log(slaveArray);
+    //return slaveArray;
+    //let mstrDiv = document.querySelectorAll(".master");
+    //mstrDiv.Child
+    for (let i = 0; i < slaveArray.length; i++) {
+        slaveArray[i].remove();
+        altArray[i].remove();
+    }
+}
+
 makeDivs(16);
 colorDivs(popArray(16));
+//clearDivs();
