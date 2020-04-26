@@ -47,7 +47,7 @@ function popArray(nbr) {
         nextBrk = (nbr * i) + 1;
         breakCol.push(nextBrk);
     }
-    //console.log(breakCol);
+    console.log(breakCol);
     return breakCol;
 }
 
@@ -55,8 +55,8 @@ function popArray(nbr) {
 //class assignment
 function colorPrimary(startCol,len) {
     let endPt = startCol + len - 1;
-    for (let i = startCol; i <= endPt; i++) {
-        let modNow = document.getElementById(i);
+    for (let i = 0; i < len; i++) {
+        let modNow = document.getElementById(i + startCol);
         //console.log(modNow);
         if (i % 2 ===0) {
             modNow.classList.add("slave");
@@ -71,8 +71,8 @@ function colorPrimary(startCol,len) {
 //class assignment
 function colorAlt(startCol,len) {
     let endPt = startCol + len - 1;
-    for (let i = startCol; i <= endPt; i++) {
-        let modNow = document.getElementById(i);
+    for (let i = 0; i < len; i++) {
+        let modNow = document.getElementById(i + startCol);
         //console.log(modNow);
         if (i % 2 ===0) {
             modNow.classList.add("alt");
@@ -88,19 +88,24 @@ function colorAlt(startCol,len) {
 //functions above
 function colorDivs (arr) {
     let len = arr.length;
+    //console.log(`Array length is ${len}.`);
     for (let i = 0; i < len; i++) {
         let startCol = arr[i];
+        //console.log(`i = ${i}.`);
+        //console.log(`startCol is ${startCol}`);
         if (i % 2 === 0) {
+            //console.log('Using colorPrimary...');
             colorPrimary(startCol,len);
         }
         else {
+            //console.log('Using colorAlt...')
             colorAlt(startCol,len);
         }
     }
 }
 
 function clearDivs () {
-    let allSlaves = document.querySelectorAll(".slave");
+    /*let allSlaves = document.querySelectorAll(".slave");
     let allAlt = document.querySelectorAll(".alt");
     let slaveArray = Array.from(allSlaves);
     let altArray = Array.from(allAlt);
@@ -111,9 +116,67 @@ function clearDivs () {
     for (let i = 0; i < slaveArray.length; i++) {
         slaveArray[i].remove();
         altArray[i].remove();
+    */
+    let divCount = document.querySelectorAll("div").length;
+    //console.log(divCount);
+    let divCntfinal = divCount - 1;
+    //console.log(divCntfinal);
+    for (let i = 1; i <= divCntfinal; i++) {
+        let grabbed = document.getElementById(`${i}`);
+        grabbed.remove();
     }
 }
 
-makeDivs(16);
-colorDivs(popArray(16));
+function restoreDefault () {
+    clearDivs(); //clear the existing child divs
+    sizeAdjust(16); 
+    makeDivs(16);
+    colorDivs(popArray(16));
+}
+
+function sizeAdjust (sq) {
+    let newPx = 960/sq; 
+    let newDim = `repeat(${sq}, ${newPx}px)`;
+    let master = document.querySelector(".master");
+    master.style.gridTemplateColumns = newDim;
+    master.style.gridTemplateRows = newDim;
+}
+
+function userMod (sq) {
+    if (Number.isInteger(sq) === false) {
+        window.alert('Plase enter a positive whole number.')
+    }
+
+    else {
+        clearDivs(); //clear the existing child divs
+        sizeAdjust(sq); //split the master div into user's size
+        makeDivs(sq);
+        colorDivs(popArray(sq));
+    }
+    
+}
+
+function simpleColor () {
+    let divCount = document.querySelectorAll("div").length;
+    console.log(divCount);
+    let divCntfinal = divCount - 1;
+    console.log(divCntfinal);
+    for (let i = 1; i <= divCntfinal; i++) {
+        let grabbed = document.getElementById(`${i}`);
+        //console.log(grabbed);
+        if (i % 2 === 0) {
+            grabbed.style.backgroundColor = "brown";
+        }
+        else {
+            grabbed.style.backgroundColor = "purple";
+        }
+    }
+}
+restoreDefault();
+//userMod(8);
 //clearDivs();
+
+//let b1 = document.querySelector("#changeButton");
+//console.log(b1);
+
+//b1.addEventListener(onclick,)
