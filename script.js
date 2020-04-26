@@ -142,41 +142,40 @@ function sizeAdjust (sq) {
     master.style.gridTemplateRows = newDim;
 }
 
-function userMod (sq) {
-    if (Number.isInteger(sq) === false) {
+function userMod () {
+    let squares = document.getElementById("grid1").value;
+    let evalSq = isNaN(Number.parseInt(squares));
+    if (evalSq === true) {
         window.alert('Plase enter a positive whole number.')
     }
 
     else {
+        let intSq = Number.parseInt(squares);
         clearDivs(); //clear the existing child divs
-        sizeAdjust(sq); //split the master div into user's size
-        makeDivs(sq);
-        colorDivs(popArray(sq));
+        sizeAdjust(intSq); //split the master div into user's size
+        makeDivs(intSq);
+        colorDivs(popArray(intSq));
     }
     
 }
 
-function simpleColor () {
-    let divCount = document.querySelectorAll("div").length;
-    console.log(divCount);
-    let divCntfinal = divCount - 1;
-    console.log(divCntfinal);
-    for (let i = 1; i <= divCntfinal; i++) {
-        let grabbed = document.getElementById(`${i}`);
-        //console.log(grabbed);
-        if (i % 2 === 0) {
-            grabbed.style.backgroundColor = "brown";
-        }
-        else {
-            grabbed.style.backgroundColor = "purple";
-        }
-    }
-}
+
 restoreDefault();
-//userMod(8);
-//clearDivs();
 
-//let b1 = document.querySelector("#changeButton");
-//console.log(b1);
+let b1 = document.querySelector("#changeButton");
 
-//b1.addEventListener(onclick,)
+b1.addEventListener("click", function() {
+    let squares = document.getElementById("grid1").value;
+    let evalSq = isNaN(Number.parseInt(squares));
+    if (evalSq === true) {
+        window.alert('Plase enter a positive whole number.')
+    }
+
+    else {
+        let intSq = Number.parseInt(squares);
+        clearDivs(); //clear the existing child divs
+        sizeAdjust(intSq); //split the master div into user's size
+        makeDivs(intSq);
+        colorDivs(popArray(intSq));
+    }
+})
