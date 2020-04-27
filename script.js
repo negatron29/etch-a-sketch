@@ -163,19 +163,25 @@ function userMod () {
 restoreDefault();
 
 let b1 = document.querySelector("#changeButton");
+let b2 = document.querySelector("#defaultButton");
 
 b1.addEventListener("click", function() {
     let squares = document.getElementById("grid1").value;
     let evalSq = isNaN(Number.parseInt(squares));
-    if (evalSq === true) {
-        window.alert('Plase enter a positive whole number.')
-    }
-
-    else {
-        let intSq = Number.parseInt(squares);
+    let intSq = Number.parseInt(squares);
+    if (evalSq === false && intSq > 0) {
         clearDivs(); //clear the existing child divs
         sizeAdjust(intSq); //split the master div into user's size
         makeDivs(intSq);
         colorDivs(popArray(intSq));
     }
+
+    else {
+        window.alert('Plase enter a positive whole number.')
+    }
 })
+
+b2.addEventListener("click", function () {
+    restoreDefault();
+})
+
