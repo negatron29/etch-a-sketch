@@ -132,6 +132,7 @@ function restoreDefault () {
     sizeAdjust(16); 
     makeDivs(16);
     colorDivs(popArray(16));
+    applyListeners();
 }
 
 function sizeAdjust (sq) {
@@ -155,6 +156,7 @@ function userMod () {
         sizeAdjust(intSq); //split the master div into user's size
         makeDivs(intSq);
         colorDivs(popArray(intSq));
+        applyListeners();
     }
     
 }
@@ -174,6 +176,7 @@ b1.addEventListener("click", function() {
         sizeAdjust(intSq); //split the master div into user's size
         makeDivs(intSq);
         colorDivs(popArray(intSq));
+        applyListeners();
     }
 
     else {
@@ -185,3 +188,30 @@ b2.addEventListener("click", function () {
     restoreDefault();
 })
 
+function applyListeners () {
+let slaveDivs = document.querySelectorAll(".slave");
+//console.log(masterDivs);
+for (let i = 0; i < slaveDivs.length; i++) {
+    let thisDiv = slaveDivs[i];
+    thisDiv.addEventListener("mouseover", function () {
+        thisDiv.style.backgroundColor = "blue";
+    })
+}
+
+let altDivs = document.querySelectorAll(".alt");
+for (let i = 0; i < altDivs.length; i++) {
+    let thatDiv = altDivs[i];
+    thatDiv.addEventListener("mouseover", function () {
+        thatDiv.style.backgroundColor = "blue";
+    })
+}
+}
+
+
+
+
+/*
+masterDivs.addEventListener("mouseover", function () {
+    masterDivs.style.backgroundColor = "blue";
+})
+*/
